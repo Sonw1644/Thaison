@@ -1,0 +1,405 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\ProductVariant;
+
+class ProductCatalogSeeder extends Seeder
+{
+    public function run(): void
+    {
+        $categoriesData = [
+            [
+                'name' => 'Gạch lát nền',
+                'description' => 'Các dòng gạch lát nền phòng khách, sảnh lớn, phòng ngủ men bóng & men mờ cao cấp.',
+                'image' => 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&auto=format&fit=crop&q=80',
+                'sort_order' => 1,
+                'status' => true,
+            ],
+            [
+                'name' => 'Gạch ốp tường',
+                'description' => 'Gạch ốp tường phòng tắm, phòng bếp, mặt tiền nhà sang trọng chống bám bẩn.',
+                'image' => 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400&auto=format&fit=crop&q=80',
+                'sort_order' => 2,
+                'status' => true,
+            ],
+            [
+                'name' => 'Gạch bông cổ điển',
+                'description' => 'Gạch bông hoa văn Indochine hoài niệm, tạo điểm nhấn nghệ thuật độc bản.',
+                'image' => 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=400&auto=format&fit=crop&q=80',
+                'sort_order' => 3,
+                'status' => true,
+            ],
+            [
+                'name' => 'Gạch giả gỗ',
+                'description' => 'Gạch vân gỗ sồi, óc chó, mun tự nhiên bền bỉ, chống ẩm mốc cong vênh 100%.',
+                'image' => 'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=400&auto=format&fit=crop&q=80',
+                'sort_order' => 4,
+                'status' => true,
+            ],
+            [
+                'name' => 'Gạch sân vườn & chống trượt',
+                'description' => 'Gạch lát sân ngoài trời, ban công, lối đi chịu lực lớn và chống rêu mốc tối đa.',
+                'image' => 'https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?w=400&auto=format&fit=crop&q=80',
+                'sort_order' => 5,
+                'status' => true,
+            ],
+            [
+                'name' => 'Gạch mosaic & hồ bơi',
+                'description' => 'Gạch mosaic thủy tinh pha lê lấp lánh cho hồ bơi, spa và điểm nhấn phòng tắm.',
+                'image' => 'https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=400&auto=format&fit=crop&q=80',
+                'sort_order' => 6,
+                'status' => true,
+            ],
+            [
+                'name' => 'Gạch vân đá Marble Calacatta',
+                'description' => 'Gạch Granite Porcelain vân đá cẩm thạch Ý sang trọng, đẳng cấp hoàng gia.',
+                'image' => 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&auto=format&fit=crop&q=80',
+                'sort_order' => 7,
+                'status' => true,
+            ],
+        ];
+
+        $categoryMap = [];
+        foreach ($categoriesData as $cData) {
+            $cat = Category::firstOrCreate(
+                ['name' => $cData['name']],
+                $cData
+            );
+            $cat->update($cData);
+            $categoryMap[$cData['name']] = $cat->id;
+        }
+
+        $productsData = [
+            [
+                'name' => 'Gạch Catalan Xám Bê Tông Hiện Đại 800×800 mm',
+                'sku' => 'GVH-CAT-8080-XBT',
+                'category_name' => 'Gạch lát nền',
+                'brand' => 'Catalan',
+                'unit' => 'Thùng (Hộp)',
+                'price' => 320000,
+                'sale_price' => 295000,
+                'stock' => 320,
+                'size' => '800×800 mm',
+                'area_per_box' => 1.92,
+                'pieces_per_box' => 3,
+                'surface' => 'Men mờ (Matt)',
+                'material' => 'Porcelain',
+                'color_pattern' => 'Xám bê tông Industrial',
+                'origin' => 'Việt Nam',
+                'anti_slip' => 'R9',
+                'weight_per_box' => 45.0,
+                'short_description' => 'Gạch lát nền Catalan tông xám bê tông phong cách Minimalism hiện đại và bền chắc.',
+                'description' => '<p>Gạch lát nền Catalan 800x800mm chất liệu Porcelain xương bán sứ cao cấp, bề mặt men mờ chống trơn trượt, thích hợp cho phòng khách và showroom sang trọng.</p>',
+                'thumbnail' => 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&auto=format&fit=crop&q=80',
+                'is_featured' => true,
+                'status' => true,
+                'variants' => [
+                    ['color_code' => '#787878', 'color_name' => 'Xám Bê Tông Vừa', 'sku' => 'GVH-CAT-8080-GRY', 'stock' => 120, 'image' => null],
+                    ['color_code' => '#3b3b3b', 'color_name' => 'Xám Đậm Charcoal', 'sku' => 'GVH-CAT-8080-CHR', 'stock' => 100, 'image' => null],
+                    ['color_code' => '#d4d4d8', 'color_name' => 'Xám Sáng Light Grey', 'sku' => 'GVH-CAT-8080-LGT', 'stock' => 100, 'image' => null],
+                ]
+            ],
+            [
+                'name' => 'Gạch Đồng Tâm Marble Calacatta Khổ Lớn 600×1200 mm',
+                'sku' => 'GVH-DT-6012-CAL',
+                'category_name' => 'Gạch vân đá Marble Calacatta',
+                'brand' => 'Đồng Tâm',
+                'unit' => 'Thùng (Hộp)',
+                'price' => 480000,
+                'sale_price' => 450000,
+                'stock' => 240,
+                'size' => '600×1200 mm',
+                'area_per_box' => 1.44,
+                'pieces_per_box' => 2,
+                'surface' => 'Men bóng (Glossy)',
+                'material' => 'Granite',
+                'color_pattern' => 'Trắng vân mây xám Calacatta',
+                'origin' => 'Việt Nam / Ý',
+                'anti_slip' => 'R9',
+                'weight_per_box' => 38.0,
+                'short_description' => 'Gạch Granite khổ lớn Calacatta vân đá cẩm thạch trắng sang trọng đẳng cấp biệt thự.',
+                'description' => '<p>Gạch Granite toàn phần Đồng Tâm kích thước 600x1200mm, bề mặt phủ men nano bóng gương chống bám bẩn tuyệt đối, tạo không gian mở rộng rãi và quý phái.</p>',
+                'thumbnail' => 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&auto=format&fit=crop&q=80',
+                'is_featured' => true,
+                'status' => true,
+                'variants' => [
+                    ['color_code' => '#f8fafc', 'color_name' => 'Trắng Vân Vàng Gold', 'sku' => 'GVH-DT-6012-GLD', 'stock' => 120, 'image' => null],
+                    ['color_code' => '#ffffff', 'color_name' => 'Trắng Vân Xám Khói', 'sku' => 'GVH-DT-6012-WHT', 'stock' => 120, 'image' => null],
+                ]
+            ],
+            [
+                'name' => 'Gạch Taicera Vàng Kem Mộc Tự Nhiên 600×600 mm',
+                'sku' => 'GVH-TAI-6060-VKM',
+                'category_name' => 'Gạch lát nền',
+                'brand' => 'Taicera',
+                'unit' => 'Thùng (Hộp)',
+                'price' => 285000,
+                'sale_price' => null,
+                'stock' => 180,
+                'size' => '600×600 mm',
+                'area_per_box' => 1.44,
+                'pieces_per_box' => 4,
+                'surface' => 'Men mờ (Matt)',
+                'material' => 'Granite',
+                'color_pattern' => 'Vàng kem mộc mạc',
+                'origin' => 'Đài Loan / VN',
+                'anti_slip' => 'R10',
+                'weight_per_box' => 32.5,
+                'short_description' => 'Gạch Granite đồng chất Taicera màu vàng kem ấm cúng tạo cảm giác gần gũi.',
+                'description' => '<p>Dòng gạch Granite đồng chất nổi tiếng của Taicera, độ cứng mài mòn cực cao, không bay màu, chịu tải trọng lớn cho nhà ở và văn phòng.</p>',
+                'thumbnail' => 'https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?w=600&auto=format&fit=crop&q=80',
+                'is_featured' => false,
+                'status' => true,
+                'variants' => []
+            ],
+            [
+                'name' => 'Gạch Viglacera Gỗ Mun Hoàng Gia 150×800 mm',
+                'sku' => 'GVH-VIG-1580-MUN',
+                'category_name' => 'Gạch giả gỗ',
+                'brand' => 'Viglacera',
+                'unit' => 'Thùng (Hộp)',
+                'price' => 340000,
+                'sale_price' => 310000,
+                'stock' => 290,
+                'size' => '150×800 mm',
+                'area_per_box' => 1.2,
+                'pieces_per_box' => 10,
+                'surface' => 'Men sần vân gỗ',
+                'material' => 'Porcelain',
+                'color_pattern' => 'Vân Gỗ Mun đen huyền bí',
+                'origin' => 'Việt Nam',
+                'anti_slip' => 'R10',
+                'weight_per_box' => 28.0,
+                'short_description' => 'Gạch thanh giả gỗ Viglacera kháng nước 100%, vân sần dập nổi tinh xảo như gỗ thật.',
+                'description' => '<p>Gạch giả gỗ thanh dài Viglacera 150x800mm mang lại vẻ ấm cúng và sang trọng cho phòng ngủ, phòng thiền, căn hộ nghỉ dưỡng.</p>',
+                'thumbnail' => 'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600&auto=format&fit=crop&q=80',
+                'is_featured' => true,
+                'status' => true,
+                'variants' => []
+            ],
+            [
+                'name' => 'Gạch Bông Men Gốm Cổ Điển Đông Dương 200×200 mm',
+                'sku' => 'GVH-BONG-2020-RET',
+                'category_name' => 'Gạch bông cổ điển',
+                'brand' => 'Đồng Tâm',
+                'unit' => 'Thùng (Hộp)',
+                'price' => 390000,
+                'sale_price' => 360000,
+                'stock' => 150,
+                'size' => '200×200 mm',
+                'area_per_box' => 1.0,
+                'pieces_per_box' => 25,
+                'surface' => 'Men mờ (Matt)',
+                'material' => 'Ceramic',
+                'color_pattern' => 'Hoa văn Indochine Retro đen trắng',
+                'origin' => 'Việt Nam',
+                'anti_slip' => 'R9',
+                'weight_per_box' => 22.0,
+                'short_description' => 'Gạch bông họa tiết retro cổ điển tạo điểm nhấn nghệ thuật cho quán cafe, quầy bar.',
+                'description' => '<p>Gạch bông gốm men mờ bền màu, chống trơn trượt, hoa văn truyền thống Đông Dương đậm chất nghệ thuật kiến trúc đương đại.</p>',
+                'thumbnail' => 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&auto=format&fit=crop&q=80',
+                'is_featured' => true,
+                'status' => true,
+                'variants' => []
+            ],
+            [
+                'name' => 'Gạch Prime Ốp Tường Phòng Tắm Ghi Xám Vân Mây 300×600 mm',
+                'sku' => 'GVH-PRI-3060-GXM',
+                'category_name' => 'Gạch ốp tường',
+                'brand' => 'Prime Group',
+                'unit' => 'Thùng (Hộp)',
+                'price' => 220000,
+                'sale_price' => 195000,
+                'stock' => 410,
+                'size' => '300×600 mm',
+                'area_per_box' => 1.44,
+                'pieces_per_box' => 8,
+                'surface' => 'Men bóng (Glossy)',
+                'material' => 'Ceramic',
+                'color_pattern' => 'Ghi xám vân mây tinh tế',
+                'origin' => 'Việt Nam',
+                'anti_slip' => 'R9',
+                'weight_per_box' => 25.0,
+                'short_description' => 'Gạch ốp tường Prime 30x60 men bóng chống bám bẩn, dễ lau chùi cho phòng tắm và bếp.',
+                'description' => '<p>Gạch ốp tường cao cấp thương hiệu Prime Group, bề mặt phủ men vi tinh siêu mịn bóng loáng, chống đọng nước và ố vàng dài lâu.</p>',
+                'thumbnail' => 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&auto=format&fit=crop&q=80',
+                'is_featured' => false,
+                'status' => true,
+                'variants' => []
+            ],
+            [
+                'name' => 'Gạch Sân Vườn Giả Cỏ & Đá Cuội Chống Trượt 400×400 mm',
+                'sku' => 'GVH-SAN-4040-GRS',
+                'category_name' => 'Gạch sân vườn & chống trượt',
+                'brand' => 'Viglacera',
+                'unit' => 'Thùng (Hộp)',
+                'price' => 185000,
+                'sale_price' => null,
+                'stock' => 380,
+                'size' => '400×400 mm',
+                'area_per_box' => 0.96,
+                'pieces_per_box' => 6,
+                'surface' => 'Nhám chống trượt (R11)',
+                'material' => 'Ceramic',
+                'color_pattern' => 'Đá cuội & Cỏ xanh sân vườn',
+                'origin' => 'Việt Nam',
+                'anti_slip' => 'R11',
+                'weight_per_box' => 19.5,
+                'short_description' => 'Gạch lát sân ngoài trời bề mặt nhám sần khuôn định hình, chống trơn trượt khi trời mưa.',
+                'description' => '<p>Gạch sân vườn Viglacera 40x40 dập nổi 3D họa tiết đá cuội và thảm cỏ tự nhiên, thoát nước nhanh, không rêu mốc, thích hợp sân thượng và ban công.</p>',
+                'thumbnail' => 'https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?w=600&auto=format&fit=crop&q=80',
+                'is_featured' => false,
+                'status' => true,
+                'variants' => []
+            ],
+            [
+                'name' => 'Gạch Mosaic Thủy Tinh Xanh Biển Hồ Bơi 300×300 mm',
+                'sku' => 'GVH-MOS-3030-BLU',
+                'category_name' => 'Gạch mosaic & hồ bơi',
+                'brand' => 'Eurotile',
+                'unit' => 'Thùng (Hộp)',
+                'price' => 520000,
+                'sale_price' => 490000,
+                'stock' => 110,
+                'size' => '300×300 mm',
+                'area_per_box' => 1.98,
+                'pieces_per_box' => 22,
+                'surface' => 'Men bóng (Glossy)',
+                'material' => 'Thủy tinh cao cấp',
+                'color_pattern' => 'Xanh biển đa sắc Ocean Blue',
+                'origin' => 'Nhập Khẩu',
+                'anti_slip' => 'R9',
+                'weight_per_box' => 18.0,
+                'short_description' => 'Gạch vỉ mosaic thủy tinh cao cấp phản chiếu ánh sáng lấp lánh cho hồ bơi và khu tắm đứng.',
+                'description' => '<p>Vỉ gạch Mosaic thủy tinh cao cấp chống hóa chất clo hồ bơi, bền màu vĩnh cửu, khúc xạ ánh nắng tạo hiệu ứng làn nước trong vắt lộng lẫy.</p>',
+                'thumbnail' => 'https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=600&auto=format&fit=crop&q=80',
+                'is_featured' => true,
+                'status' => true,
+                'variants' => []
+            ],
+            [
+                'name' => 'Gạch Eurotile Vân Đá Slate Đen Khắc Kim 600×1200 mm',
+                'sku' => 'GVH-EUR-6012-BLK',
+                'category_name' => 'Gạch vân đá Marble Calacatta',
+                'brand' => 'Eurotile',
+                'unit' => 'Thùng (Hộp)',
+                'price' => 560000,
+                'sale_price' => 520000,
+                'stock' => 160,
+                'size' => '600×1200 mm',
+                'area_per_box' => 1.44,
+                'pieces_per_box' => 2,
+                'surface' => 'Men vi tinh khắc kim',
+                'material' => 'Granite',
+                'color_pattern' => 'Đen tuyền ánh kim Nero Marquina',
+                'origin' => 'Việt Nam / Ý',
+                'anti_slip' => 'R9',
+                'weight_per_box' => 39.0,
+                'short_description' => 'Gạch khổ lớn khắc kim vàng trên nền đen đá phiến sang trọng quyền quý.',
+                'description' => '<p>Eurotile kiệt tác gạch nghệ thuật với đường nét khắc kim vàng chìm trong xương gạch Granite, làm nổi bật không gian phòng khách xa hoa.</p>',
+                'thumbnail' => 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=600&auto=format&fit=crop&q=80',
+                'is_featured' => true,
+                'status' => true,
+                'variants' => []
+            ],
+            [
+                'name' => 'Gạch Giả Gỗ Sồi Bắc Âu Scandinavian 200×1200 mm',
+                'sku' => 'GVH-OAK-2012-SCA',
+                'category_name' => 'Gạch giả gỗ',
+                'brand' => 'Bạch Mã',
+                'unit' => 'Thùng (Hộp)',
+                'price' => 375000,
+                'sale_price' => 345000,
+                'stock' => 210,
+                'size' => '200×1200 mm',
+                'area_per_box' => 1.44,
+                'pieces_per_box' => 6,
+                'surface' => 'Men sần vân gỗ',
+                'material' => 'Porcelain',
+                'color_pattern' => 'Gỗ sồi vàng Scandinavian Oak',
+                'origin' => 'Bạch Mã Malaysia/VN',
+                'anti_slip' => 'R10',
+                'weight_per_box' => 31.0,
+                'short_description' => 'Gạch thanh gỗ màu sồi sáng Bắc Âu mang lại cảm giác thoáng đãng, ấm áp.',
+                'description' => '<p>Gạch vân gỗ Bạch Mã xương Porcelain cứng cáp, chống trầy xước tuyệt hảo khi nuôi thú cưng hoặc kéo đồ đạc, không mối mọt.</p>',
+                'thumbnail' => 'https://images.unsplash.com/photo-1536376072261-38c75010e6c9?w=600&auto=format&fit=crop&q=80',
+                'is_featured' => false,
+                'status' => true,
+                'variants' => []
+            ],
+            [
+                'name' => 'Gạch Thẻ Trắng Gốm Subway Tile Trang Trí 75×300 mm',
+                'sku' => 'GVH-THE-7530-WHT',
+                'category_name' => 'Gạch ốp tường',
+                'brand' => 'Prime Group',
+                'unit' => 'Thùng (Hộp)',
+                'price' => 260000,
+                'sale_price' => 235000,
+                'stock' => 330,
+                'size' => '75×300 mm',
+                'area_per_box' => 1.0,
+                'pieces_per_box' => 44,
+                'surface' => 'Men bóng (Glossy)',
+                'material' => 'Ceramic',
+                'color_pattern' => 'Trắng vát cạnh Subway Tile',
+                'origin' => 'Việt Nam',
+                'anti_slip' => 'R9',
+                'weight_per_box' => 16.0,
+                'short_description' => 'Gạch thẻ trắng gốm vát cạnh phong cách Metro New York cho tường bếp & quán bar.',
+                'description' => '<p>Gạch thẻ trang trí trắng tinh khiết men bóng, kiểu dáng thời thượng cho mảng tường bếp (kitchen backsplash) và phòng tắm hiện đại.</p>',
+                'thumbnail' => 'https://images.unsplash.com/photo-1584622781564-1d987f7333c1?w=600&auto=format&fit=crop&q=80',
+                'is_featured' => false,
+                'status' => true,
+                'variants' => []
+            ],
+            [
+                'name' => 'Gạch Terrazzo Hạt Đá Mài Đa Sắc Pastel 600×600 mm',
+                'sku' => 'GVH-TRZ-6060-PAS',
+                'category_name' => 'Gạch lát nền',
+                'brand' => 'Catalan',
+                'unit' => 'Thùng (Hộp)',
+                'price' => 350000,
+                'sale_price' => null,
+                'stock' => 270,
+                'size' => '600×600 mm',
+                'area_per_box' => 1.44,
+                'pieces_per_box' => 4,
+                'surface' => 'Men mờ (Matt)',
+                'material' => 'Porcelain',
+                'color_pattern' => 'Hạt đá mài Terrazzo Pastel',
+                'origin' => 'Việt Nam',
+                'anti_slip' => 'R10',
+                'weight_per_box' => 32.0,
+                'short_description' => 'Gạch hạt đá mài Terrazzo phong cách đương đại tươi trẻ, chống trơn trượt.',
+                'description' => '<p>Gạch Terrazzo hạt đá nhỏ phối màu pastel nhã nhặn, phù hợp cho quán cafe, phòng làm việc, căn hộ phong cách Japandi và Minimalist.</p>',
+                'thumbnail' => 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=600&auto=format&fit=crop&q=80',
+                'is_featured' => true,
+                'status' => true,
+                'variants' => []
+            ],
+        ];
+
+        foreach ($productsData as $pData) {
+            $catId = $categoryMap[$pData['category_name']] ?? Category::first()->id;
+            $variants = $pData['variants'] ?? [];
+            unset($pData['category_name'], $pData['variants']);
+            $pData['category_id'] = $catId;
+
+            $product = Product::updateOrCreate(
+                ['sku' => $pData['sku']],
+                $pData
+            );
+
+            if (!empty($variants)) {
+                $product->variants()->delete();
+                foreach ($variants as $v) {
+                    $product->variants()->create($v);
+                }
+            }
+        }
+    }
+}
